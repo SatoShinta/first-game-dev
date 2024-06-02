@@ -1,28 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class HitCounter : MonoBehaviour
+public class HitCounter2 : MonoBehaviour
 {
     [SerializeField, Header("弾が当たった回数")] private int counter = 0;
     [SerializeField, Header("増加係数")] private float growthFactor = 0.1f;
     [SerializeField, Header("移動速度")] private float moveSpeed = 1f;
-
+    //経過時間
     private float elapsedTime = 0f;
+
 
     private void Update()
     {
-        //スポーンしてからの経過時間を更新
         elapsedTime += Time.deltaTime;
-
-        //3秒経過したら左に移動
         if (elapsedTime >= 3f)
         {
-            MoveLeft();
+            Moveleft();
         }
     }
-
 
 
     //ほかの2dコライダーと接触したときに
@@ -34,31 +30,27 @@ public class HitCounter : MonoBehaviour
             //counterに数値を増やしていく
             counter++;
 
-            //objectのサイズを増加
-            Vector3 scale = transform.localScale;//現在のスケールを取得
-            scale += Vector3.one * growthFactor;//サイズを増加
-            transform.localScale = scale;//新しいサイズを設定
+            Vector3 scale = transform.localScale;
+            scale += Vector3.one * growthFactor;
+            transform.localScale = scale;
         }
 
         //もし、counterが右側の数値を超えたら
-        if (counter >= 10)
+        if (counter >= 20)
         {
             //このscriptをアタッチしているオブジェクトは消える
             Destroy(this.gameObject);
         }
 
-        //HPタグを持ったobjectに当たったら
         if (collision.gameObject.tag == "HP")
         {
-            //このオブジェクトを破壊する
             Destroy(this.gameObject);
         }
-
     }
 
-    //左に移動するメソッド
-    private void MoveLeft()
+    private void Moveleft()
     {
         transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 }
+

@@ -5,12 +5,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField, Header("’e‚ª¶‚«‚½ŽžŠÔ")] private float lifeTime = 0f;
-    [SerializeField, Header("Å‘å¶‘¶ŽžŠÔ")] private float max_life_time = 4f;
+    
+  
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemy3")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
         {
             Destroy(this.gameObject);
         }
@@ -22,14 +30,7 @@ public class Bullet : MonoBehaviour
         this.transform.position += new Vector3(0.02f, 0 , 0);
 
 
-        //¶‘¶ŽžŠÔ‚ðXV‚µAÅ‘å¶‘¶ŽžŠÔ‚ð’´‚¦‚½‚ç’e‚ªÁ‚¦‚é
-        lifeTime += Time.deltaTime;
-        if (lifeTime > max_life_time)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        
+     
         
        
     }
