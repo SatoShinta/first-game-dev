@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class HitCounter : MonoBehaviour
 {
-    [SerializeField, Header("’e‚ª“–‚½‚Á‚½‰ñ”")] private int counter = 0;
+    [SerializeField, Header("å¼¾ãŒå½“ãŸã£ãŸå›žæ•°")] private int counter = 0;
     private int rnd;
     private int rnd2;
     private int rnd3;
 
     public void Update()
     {
-        //ƒ‰ƒ“ƒ_ƒ€‚È”’l‚ðŠl“¾‚·‚é
+        //ãƒ©ãƒ³ãƒ€ãƒ ãªæ•°å€¤ã‚’ç²å¾—ã™ã‚‹
         int rnd = Random.Range(1, 51);
         int rnd2 = Random.Range(1, 71);
         int rnd3 = Random.Range(1, 101);
@@ -20,22 +20,21 @@ public class HitCounter : MonoBehaviour
     }
 
 
-    //‚Ù‚©‚Ì2dƒRƒ‰ƒCƒ_[‚ÆÚG‚µ‚½‚Æ‚«‚É
+    //ã»ã‹ã®2dã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã¨æŽ¥è§¦ã—ãŸã¨ãã«
     public void OnCollisionEnter2D(Collision2D collision)    
     {
-        //‚à‚µABulletƒ^ƒO‚ðŽ‚Á‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ª‚±‚Ìscript‚ðƒAƒ^ƒbƒ`‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚É“–‚½‚Á‚½‚ç
+        //ã‚‚ã—ã€Bulletã‚¿ã‚°ã‚’æŒã£ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã“ã®scriptã‚’ã‚¢ã‚¿ãƒƒãƒã—ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å½“ãŸã£ãŸã‚‰
         if (collision.gameObject.tag == "Bullet")
         {
-            //counter‚É”’l‚ð‘‚â‚µ‚Ä‚¢‚­
+            //counterã«æ•°å€¤ã‚’å¢—ã‚„ã—ã¦ã„ã
             counter++;
         }
         
-        //‚à‚µAcounter‚ª‰E‘¤‚Ì”’l‚ð’´‚¦‚½‚ç
+        //ã‚‚ã—ã€counterãŒå³å´ã®æ•°å€¤ã‚’è¶…ãˆãŸã‚‰
         if(counter >= 10)
         {
-            //‚±‚Ìscript‚ðƒAƒ^ƒbƒ`‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ÍÁ‚¦‚é
+            //ã“ã®scriptã‚’ã‚¢ã‚¿ãƒƒãƒã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯æ¶ˆãˆã‚‹
             Destroy(this.gameObject);
         }
     }
 }
-
