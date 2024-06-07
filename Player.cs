@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField, Header("ƒvƒŒƒCƒ„[ƒXƒs[ƒh")] int speed = 1;
-    [SerializeField, Header("X²ãŒÀ")] int xjiku = 1;
-    [SerializeField, Header("Y²ãŒÀ")] int yjiku = 1;
-    [SerializeField, Header("’e‚Ìí—Ş")] GameObject bulletPrefab;
-    [SerializeField, Header("”­ËŒû")] GameObject muzzle;
-    [SerializeField, Header("”­ËŠÔŠu")] private float shootTimer = 0f;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¹ãƒ”ãƒ¼ãƒ‰")] int speed = 1;
+    [SerializeField, Header("Xè»¸ä¸Šé™")] int xjiku = 1;
+    [SerializeField, Header("Yè»¸ä¸Šé™")] int yjiku = 1;
+    [SerializeField, Header("å¼¾ã®ç¨®é¡")] GameObject bulletPrefab;
+    [SerializeField, Header("ç™ºå°„å£")] GameObject muzzle;
+    [SerializeField, Header("ç™ºå°„é–“éš”")] private float shootTimer = 0f;
     private float timer = 0f;
 
-    private bool canMove = true;//ƒvƒŒƒCƒ„[‚ª“®‚¯‚é‚©“º‰İ‚ğ§Œä‚·‚éƒtƒ‰ƒO
-    private Renderer playerRenderer;//ƒvƒŒƒCƒ„[‚ÌRendererƒRƒ“ƒ|[ƒlƒ“ƒg
+    private bool canMove = true;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå‹•ã‘ã‚‹ã‹éŠ…è²¨ã‚’åˆ¶å¾¡ã™ã‚‹ãƒ•ãƒ©ã‚°
+    private Renderer playerRenderer;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Rendererã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 
-    //‰Šú‰»
+    //åˆæœŸåŒ–
     private void Start()
     {
-        //RendererƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+        //Rendererã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
         playerRenderer = GetComponent<Renderer>();
     }
 
@@ -29,8 +29,7 @@ public class Player : MonoBehaviour
     {
         if (canMove)
         {
-            transform.position += new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * speed, 0, 0);
-            transform.position += new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * speed, 0);
+            transform.position += new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * speed, Input.GetAxis("Vertical") * Time.deltaTime * speed, 0);
 
             Vector3 vector3 = transform.position;
 
@@ -39,12 +38,12 @@ public class Player : MonoBehaviour
 
             transform.position = vector3;
 
-            //ƒ^ƒCƒ}[‚ğXV‚µA0.5•b‚²‚Æ‚É’e‚ğ”­Ë‚·‚é
+            //ã‚¿ã‚¤ãƒãƒ¼ã‚’æ›´æ–°ã—ã€0.5ç§’ã”ã¨ã«å¼¾ã‚’ç™ºå°„ã™ã‚‹
             timer += Time.deltaTime;
             if (timer >= shootTimer)
             {
                 timer = 0f;
-                //‚±‚±‚ÅshootBulletƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·
+                //ã“ã“ã§shootBulletãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™
                 shootBullet();
             }
         }
@@ -55,10 +54,10 @@ public class Player : MonoBehaviour
     }
     
 
-        //’e‚ğ”­Ë‚·‚éƒƒ\ƒbƒh
+        //å¼¾ã‚’ç™ºå°„ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
         void shootBullet()
         {
-            //ƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+            //ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
             if (Input.GetKey(KeyCode.Space))
             {
                 GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, Quaternion.identity);
@@ -70,7 +69,7 @@ public class Player : MonoBehaviour
             }
         }
 
-    //ƒvƒŒƒCƒ„[‚ª“G‚É“–‚½‚Á‚½‚Ìˆ—
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ•µã«å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("enemy") || other.CompareTag("enemy3"))
@@ -79,7 +78,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //ˆê’èŠÔ“®‚¯‚È‚­‚·‚éƒRƒ‹[ƒ`ƒ“
+    //ä¸€å®šæ™‚é–“å‹•ã‘ãªãã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
     private System.Collections.IEnumerator DisableMovementForSeconds(float seconds)
     {
         canMove = false;
@@ -87,10 +86,10 @@ public class Player : MonoBehaviour
         while (timer < seconds)
         {
             playerRenderer.enabled = !playerRenderer.enabled;
-            yield return new WaitForSeconds(0.1f);//0.1•b‚²‚Æ‚É“_–Å
+            yield return new WaitForSeconds(0.1f);//0.1ç§’ã”ã¨ã«ç‚¹æ»…
             timer += 0.1f;
         }
-        playerRenderer.enabled = true;// “_–ÅI—¹ŒãA•\¦‚ğ‚à‚Æ‚É–ß‚·
+        playerRenderer.enabled = true;// ç‚¹æ»…çµ‚äº†å¾Œã€è¡¨ç¤ºã‚’ã‚‚ã¨ã«æˆ»ã™
         canMove = true;
     }
 
